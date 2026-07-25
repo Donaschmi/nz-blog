@@ -9,8 +9,8 @@ author: "Donatien"
 default_lang: "fr"
 
 # Change this to your GitHub Pages URL once live, e.g. https://username.github.io
-url: ""
-baseurl: ""
+url: "https://donaschmi.github.io"
+baseurl: "/nz-blog"
 
 # ── Build settings ─────────────────────────────────────────────
 markdown: kramdown
