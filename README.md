@@ -56,7 +56,62 @@ Either way the audio and transcript are only your raw material — they never go
 
 ---
 
-## 4. Preview locally (optional)
+## 4. Adding photos and videos
+
+Put your media files in `assets/img/` (photos) or `assets/video/` (clips) first, then use these snippets inside the `lang-en` / `lang-fr` blocks of a post. The `_drafts/TEMPLATE.md` file has all of them ready to copy.
+
+**One photo:**
+
+```markdown
+![Lake Tekapo at dusk](/assets/img/tekapo.jpg)
+```
+
+**A gallery** — click any photo to open it full-size. Add as many as you like:
+
+```html
+<div class="gallery">
+  <img src="/assets/img/day1.jpg" alt="Morning fog">
+  <img src="/assets/img/day2.jpg" alt="The summit">
+  <img src="/assets/img/day3.jpg" alt="Emerald lakes">
+</div>
+```
+
+For bigger tiles use `class="gallery cols-2"` (two per row) or `cols-3`.
+
+**A short clip you filmed** (self-hosted). Keep it small — GitHub blocks files over 100 MB, so trim or compress first:
+
+```html
+<video class="post-video" controls src="/assets/video/tongariro.mp4"></video>
+```
+
+**A YouTube video** (best for anything longer — no storage limits). Take the ID from the URL (after `v=` or `youtu.be/`):
+
+```html
+<div class="embed"><iframe src="https://www.youtube.com/embed/VIDEO_ID" title="video" allowfullscreen></iframe></div>
+```
+
+Everything is responsive and styled to match. Or just tell me "add these photos as a gallery" / "embed this clip" and I'll handle it.
+
+---
+
+## 5. The Map page
+
+The site has a **Map** page (`/map/`) that drops a pin for every post and links each pin back to its story. It uses free OpenStreetMap tiles — no account or API key.
+
+A post appears on the map only if it has coordinates in its front matter:
+
+```yaml
+lat: -45.0312
+lng: 168.6626
+```
+
+To find them: open Google Maps, right-click the spot, and click the two numbers at the top of the menu to copy them (latitude first, then longitude). Paste them as `lat` and `lng`. Posts without coordinates simply don't show a pin — everything else still works.
+
+When I build a post for you, I'll add the coordinates automatically from the location.
+
+---
+
+## 6. Preview locally (optional)
 
 Not required — you can edit straight on GitHub. But if you want a local preview:
 
@@ -75,14 +130,16 @@ Needs Ruby installed. On GitHub, none of this matters — Pages builds it for yo
 ```
 _config.yml          site settings (title, taglines, default language)
 index.html           home page (list of posts)
+map.html             map of all posts (pins → stories)
 about.md             about page
 _layouts/            page templates (default, post)
 _includes/           header & footer
 _posts/              published posts  ← add files here
 _drafts/TEMPLATE.md  copy this to start a new post
 assets/css/style.css the earthy theme
-assets/js/main.js    the EN/FR language toggle
+assets/js/main.js    language toggle + photo lightbox
 assets/img/          your photos
+assets/video/        your self-hosted clips
 ```
 
 Kia ora, and enjoy the year. 🇳🇿

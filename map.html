@@ -1,0 +1,65 @@
+---
+layout: default
+title: Map
+permalink: /map/
+---
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+<section class="hero" style="margin-bottom:1.6rem">
+  <h1 class="hero-title">
+    <span class="lang-en">Where I've been</span>
+    <span class="lang-fr">Où je suis passé</span>
+  </h1>
+  <p class="hero-lede">
+    <span class="lang-en">Every story, pinned to the map. Tap a pin to open the post.</span>
+    <span class="lang-fr">Chaque récit, épinglé sur la carte. Touche un point pour ouvrir l'article.</span>
+  </p>
+</section>
+
+<div id="map" class="map-canvas"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  var posts = [
+    {% for post in site.posts %}{% if post.lat and post.lng %}{
+      lat: {{ post.lat }}, lng: {{ post.lng }},
+      url: {{ post.url | relative_url | jsonify }},
+      loc: {{ post.location | jsonify }},
+      date: {{ post.date | date: "%d %b %Y" | jsonify }},
+      en: {{ post.title_en | default: post.title | jsonify }},
+      fr: {{ post.title_fr | default: post.title | jsonify }}
+    },{% endif %}{% endfor %}
+  ];
+
+  var map = L.map("map", { scrollWheelZoom: false }).setView([-41.0, 173.5], 5);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var bounds = [];
+  posts.forEach(function (p) {
+    var marker = L.circleMarker([p.lat, p.lng], {
+      radius: 9, color: "#a9542f", weight: 2,
+      fillColor: "#c56a44", fillOpacity: 0.9
+    }).addTo(map);
+    var html =
+      '<div class="map-pop">' +
+        '<span class="pop-loc">' + (p.loc || "") + " · " + p.date + '</span>' +
+        '<a class="pop-title" href="' + p.url + '">' +
+          '<span class="lang-en">' + p.en + '</span>' +
+          '<span class="lang-fr">' + p.fr + '</span>' +
+        '</a>' +
+      '</div>';
+    marker.bindPopup(html);
+    marker.on("mouseover", function () { marker.openPopup(); });
+    bounds.push([p.lat, p.lng]);
+  });
+
+  if (bounds.length === 1) map.setView(bounds[0], 9);
+  else if (bounds.length > 1) map.fitBounds(bounds, { padding: [50, 50] });
+})();
+</script>

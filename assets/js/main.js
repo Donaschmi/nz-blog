@@ -23,3 +23,26 @@
     setLang(next);
   });
 })();
+
+// Lightbox — click a gallery photo to view it full-size.
+(function () {
+  var box = document.createElement("div");
+  box.className = "lightbox";
+  box.innerHTML = '<img alt="">';
+  document.body.appendChild(box);
+  var big = box.querySelector("img");
+
+  document.addEventListener("click", function (e) {
+    var img = e.target.closest(".gallery img");
+    if (img) {
+      big.src = img.getAttribute("src");
+      big.alt = img.getAttribute("alt") || "";
+      box.classList.add("open");
+      return;
+    }
+    if (e.target === box || e.target === big) box.classList.remove("open");
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") box.classList.remove("open");
+  });
+})();

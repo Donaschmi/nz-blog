@@ -2,6 +2,8 @@
 layout: post
 date: 2026-07-24
 location: "Auckland"
+lat: -36.8485                  # for the pin on the Map page
+lng: 174.7633
 
 # Titles (one per language)
 title_en: "Landing in Auckland: jet-lag, rain, and a flat white"
