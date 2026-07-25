@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-head">
+    {% if page.location %}<p class="post-loc">📍 {{ page.location }}</p>{% endif %}
+    <h1 class="post-title">
+      <span class="lang-en">{{ page.title_en | default: page.title }}</span>
+      <span class="lang-fr">{{ page.title_fr | default: page.title }}</span>
+    </h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time>
+    </p>
+  </header>
+
+  {% if page.cover %}
+  <img class="post-cover" src="{{ page.cover | relative_url }}" alt="{{ page.title }}">
+  {% endif %}
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav">
+    {% if page.previous.url %}<a class="prev" href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>{% endif %}
+    {% if page.next.url %}<a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>{% endif %}
+  </nav>
+</article>

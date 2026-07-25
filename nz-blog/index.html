@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<section class="hero">
+  <h1 class="hero-title">
+    <span class="lang-en">My Working Holiday in New&nbsp;Zealand</span>
+    <span class="lang-fr">Mon PVT en Nouvelle-Zélande</span>
+  </h1>
+  <p class="hero-lede">
+    <span class="lang-en">Stories from a year on the road in Aotearoa — one day, one trip at a time.</span>
+    <span class="lang-fr">Des récits d'une année sur les routes d'Aotearoa — une journée, un voyage à la fois.</span>
+  </p>
+</section>
+
+<section class="post-list">
+  {% for post in paginator.posts %}
+  <a class="card" href="{{ post.url | relative_url }}">
+    {% if post.cover %}<div class="card-media"><img src="{{ post.cover | relative_url }}" alt=""></div>{% endif %}
+    <div class="card-body">
+      {% if post.location %}<span class="card-loc">📍 {{ post.location }}</span>{% endif %}
+      <h2 class="card-title">
+        <span class="lang-en">{{ post.title_en | default: post.title }}</span>
+        <span class="lang-fr">{{ post.title_fr | default: post.title }}</span>
+      </h2>
+      <p class="card-date">{{ post.date | date: "%d %b %Y" }}</p>
+      <p class="card-excerpt">
+        <span class="lang-en">{{ post.excerpt_en | default: post.excerpt | strip_html | truncate: 160 }}</span>
+        <span class="lang-fr">{{ post.excerpt_fr | default: post.excerpt | strip_html | truncate: 160 }}</span>
+      </p>
+    </div>
+  </a>
+  {% endfor %}
+</section>
+
+{% if paginator.total_pages > 1 %}
+<nav class="pager">
+  {% if paginator.previous_page %}<a href="{{ paginator.previous_page_path | relative_url }}">←</a>{% endif %}
+  <span>{{ paginator.page }} / {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}<a href="{{ paginator.next_page_path | relative_url }}">→</a>{% endif %}
+</nav>
+{% endif %}

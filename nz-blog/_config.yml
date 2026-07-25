@@ -1,0 +1,32 @@
+# ── Site settings ──────────────────────────────────────────────
+title: "Kia Ora — mon année en Nouvelle-Zélande"
+tagline_en: "A working-holiday journal from Aotearoa"
+tagline_fr: "Carnet de mon PVT en Nouvelle-Zélande"
+description: "Audio-first travel journal from my Working Holiday in New Zealand."
+author: "Donatien"
+
+# Default language shown on first load: "en" or "fr"
+default_lang: "fr"
+
+# Change this to your GitHub Pages URL once live, e.g. https://username.github.io
+url: ""
+baseurl: ""
+
+# ── Build settings ─────────────────────────────────────────────
+markdown: kramdown
+permalink: /posts/:year/:month/:day/:title/
+paginate: 5
+paginate_path: "/page:num/"
+
+# GitHub Pages compatible plugins only
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+# Files Jekyll should ignore
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

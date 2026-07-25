@@ -1,0 +1,18 @@
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark">Kia&nbsp;Ora</span>
+      <span class="brand-sub">
+        <span class="lang-en">{{ site.tagline_en }}</span>
+        <span class="lang-fr">{{ site.tagline_fr }}</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}"><span class="lang-en">Journal</span><span class="lang-fr">Journal</span></a>
+      <a href="{{ '/about/' | relative_url }}"><span class="lang-en">About</span><span class="lang-fr">À propos</span></a>
+      <button class="lang-toggle" type="button" aria-label="Switch language">
+        <span class="lang-en">FR</span><span class="lang-fr">EN</span>
+      </button>
+    </nav>
+  </div>
+</header>
